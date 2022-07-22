@@ -7,6 +7,7 @@ Install
 -----------
 
 ```
+make
 make install
 ```
 
