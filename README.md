@@ -10,6 +10,8 @@ Install
 make install
 ```
 
+You need `make` and `m4`.
+
 Configuration
 ---------------
 
