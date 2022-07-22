@@ -29,3 +29,8 @@ Configuration
   Format: `btrfs-shanpshot/target/subvolume`
 
 See details in [service file](btrfs-snapshot-hourly.service.in).
+
+License
+----------------
+
+MIT or Public domain (whichever you want).
