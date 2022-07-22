@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+# This program is in the public domain
+
+shopt -s nullglob
+
+if [[ -z $CACHE_DIRECTORY ]] || [[ -z $1 ]]; then
+	exit
+fi
+
+for d in ${CACHE_DIRECTORY//:/ }; do
+	for s in "$d"/*; do
+		declare -i atime=$(stat -c %X "$s")
+		declare -i now=$(date +%s)
+
+		if (( now - atime > $1 )); then
+			btrfs --verbose subvolume delete "$s"
+		fi
+	done
+done

@@ -1,0 +1,12 @@
+# This file is in the public domain
+
+[Unit]
+Description=Snapshot home subvolume hourly
+Documentation=man:btrfs-subvolume(8)
+
+[Timer]
+OnCalendar=hourly
+AccuracySec=10min
+
+[Install]
+WantedBy=timers.target

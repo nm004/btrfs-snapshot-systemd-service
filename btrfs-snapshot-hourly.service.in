@@ -1,0 +1,52 @@
+# This file is in the public domain
+
+[Unit]
+Description=Snapshot btrfs subvolume
+Documentation=man:btrfs-subvolume(8)
+
+[Service]
+Type=oneshot
+
+# Keep snapshots up to 7 days
+#Environment=SNAPSHOT_KEEP_UPLIMIT=604800
+
+# Snapshot name format (pass to `date`)
+#Environment=SNAPSHOT_NAME_FORMAT=%%y%%m%%d%%H
+
+ExecStartPre=PREFIX/libexec/btrfs-snapshot/cleansnapshots ${SNAPSHOT_KEEP_UPLIMIT}
+ExecStart=PREFIX/libexec/btrfs-snapshot/createsnapshot ${SNAPSHOT_NAME_FORMAT}
+
+# Target subvolumes are taken from the cache directories. Need to set ReadWritePaths too.
+#CacheDirectory=btrfs-snapshot/home
+#CacheDirectory=btrfs-snapshot/root
+#ReadWritePaths=%C/btrfs-snapshot/home
+#ReadWritePaths=%C/btrfs-snapshot/root
+
+# Hardening options
+
+ProtectHostname=true
+ProtectProc=invisible
+ProtectSystem=strict
+ProtectHome=read-only
+
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectControlGroups=true
+
+PrivateTmp=true
+PrivateDevices=true
+PrivateMounts=true
+PrivateNetwork=true
+
+RestrictRealtime=true
+RestrictAddressFamilies=none
+RestrictNamespaces=true
+
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+MemoryDenyWriteExecute=true
+LockPersonality=yes
+NoNewPrivileges=true
+RemoveIPC=true
