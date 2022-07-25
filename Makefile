@@ -1,6 +1,6 @@
 DESTDIR?=
 PREFIX?=/usr/local
-SYSTEMD_PREFIX?=/etc
+SYSTEMD_PREFIX?=$(PREFIX)
 
 all: createsnapshot cleansnapshots btrfs-snapshot@.service btrfs-snapshot@.timer
 
