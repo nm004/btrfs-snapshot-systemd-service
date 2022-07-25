@@ -1,7 +1,7 @@
 Btrfs snapshot systemd service
 ====================================
 
-This makes a snapshot of subvolumes regularly and deletes old snapshots (optional).
+This makes a snapshot of subvolumes regularly and deletes old snapshots.
 
 Install
 -----------
@@ -17,10 +17,12 @@ Start service
 ---------------
 
 ```
-systemctl enable --now btrfs-snapshot@hourly.timer
+systemctl enable --now btrfs-snapshot@whatever.timer
 ```
 
 You need to set `CacheDirectory` and `ReadWritePaths`.
+
+Edit `OnCalender` parameter in `btrfs-snapshot@.timer`, if you want to configure the snapshot interval (default: hourly).
 
 Configuration
 ---------------
