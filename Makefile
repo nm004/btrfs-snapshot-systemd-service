@@ -2,9 +2,13 @@ DESTDIR?=
 PREFIX?=/usr/local
 SYSTEMD_PREFIX?=/etc
 
-btrfs-snapshot-hourly.service: btrfs-snapshot-hourly.service.in
+all: createsnapshot cleansnapshots btrfs-snapshot@.service btrfs-snapshot@.timer
+
+btrfs-snapshot@.service: btrfs-snapshot@.service.in
 	m4 -DPREFIX='$(PREFIX)' $< > $@
-	
-install: btrfs-snapshot-hourly.service
+
+install: all
 	install -Dt '$(DESTDIR)$(PREFIX)/libexec/btrfs-snapshot' createsnapshot cleansnapshots
-	install -m644 -Dt '$(DESTDIR)$(SYSTEMD_PREFIX)/systemd/system btrfs-snapshot-hourly.service' btrfs-snapshot-hourly.service btrfs-snapshot-hourly.timer
+	install -m644 -Dt '$(DESTDIR)$(SYSTEMD_PREFIX)/systemd/system' btrfs-snapshot@.service btrfs-snapshot@.timer
+
+.PHONY: all
