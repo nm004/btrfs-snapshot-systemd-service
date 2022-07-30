@@ -34,7 +34,7 @@ Configuration
 
 `SNAPSHOT_KEEP_UPLIMIT` (Environment)
  
-  How long this keeps the snapshots in seconds (default: never delete).
+  How long you keep the snapshots in seconds (default: 7days).
  
 `SNAPSHOT_NAME_FORMAT` (Environment)
 

@@ -8,10 +8,10 @@ Documentation=man:btrfs-subvolume(8)
 Type=oneshot
 
 # Keep snapshots up to 7 days
-#Environment=SNAPSHOT_KEEP_UPLIMIT=604800
+Environment=SNAPSHOT_KEEP_UPLIMIT=604800
 
 # Snapshot name format (pass to `date`)
-#Environment=SNAPSHOT_NAME_FORMAT=%%y%%m%%d%%H
+Environment=SNAPSHOT_NAME_FORMAT=%%y%%m%%d%%H
 
 ExecStartPre=PREFIX/libexec/btrfs-snapshot/cleansnapshots ${SNAPSHOT_KEEP_UPLIMIT}
 ExecStart=PREFIX/libexec/btrfs-snapshot/createsnapshot ${SNAPSHOT_NAME_FORMAT}

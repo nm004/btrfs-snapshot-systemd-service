@@ -1,12 +1,11 @@
 #!/usr/bin/bash
 # This program is in the public domain
 
-if [[ -z $CACHE_DIRECTORY ]]; then
+if [[ -z $CACHE_DIRECTORY ]] || [[ -z $1 ]]; then
 	exit
 fi
 
-format=${1:-%y%m%d%H}
 for s in ${CACHE_DIRECTORY//:/ }; do
 	d=${s#/var/cache/btrfs-snapshot}
-	btrfs --verbose subvolume snapshot -r "$d" "$s/$(date +"$format")"
+	btrfs --verbose subvolume snapshot -r "$d" "$s/$(date +"$1")"
 done
